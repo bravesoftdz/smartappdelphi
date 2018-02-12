@@ -40,7 +40,7 @@ var
   i: integer;
 begin
   Webservice:= TWebservice.Create;
-  Webservice.SetBaseURI('http://localhost:5000/predict');
+  Webservice.SetBaseURI('https://smartappdelphi.herokuapp.com/predict');
   Input:= TInput.Create;
   Input.Labels:= [numEtiquetas1.Text, numEtiquetas2.Text, numEtiquetas3.Text];
   Response := Webservice.Post([], Input.Json);
