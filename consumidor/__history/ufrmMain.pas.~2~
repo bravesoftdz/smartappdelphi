@@ -1,0 +1,61 @@
+unit ufrmMain;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Samples.Spin;
+
+type
+  TfrmMain = class(TForm)
+    lblEtiquetas: TLabel;
+    numEtiquetas: TSpinEdit;
+    lblEditores: TLabel;
+    numEditores: TSpinEdit;
+    lblBotones: TLabel;
+    numBotones: TSpinEdit;
+    btnPredecir: TButton;
+    procedure btnPredecirClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmMain: TfrmMain;
+
+implementation
+
+{$R *.dfm}
+
+uses Webservice, Webservice.Interfaces, Webservice.Input, Webservice.Output;
+
+procedure TfrmMain.btnPredecirClick(Sender: TObject);
+var
+  Webservice: TWebservice;
+  Input: TInput;
+  Response: IWebserviceResponse;
+  Output: TOutput;
+  i: integer;
+begin
+  Webservice:= TWebservice.Create;
+  Webservice.SetBaseURI('http://localhost:5000/predict');
+  Input:= TInput.Create;
+  with Input do
+  begin
+    Values:= [
+      ['4'],
+      ['5'],
+      ['6']
+    ]
+  end;
+  ShowMessage(Input.Json.ToJSON);
+  Response := Webservice.Post(['.json'], Input.Json);
+  ShowMessage(Response.ContentAsString);
+  Output:= TOutput.FromJsonString(Response.ContentAsString);
+  for i:= 0 to Pred(output.Values.Count) do
+    ShowMessage(Output.Values[i]);
+end;
+
+end.

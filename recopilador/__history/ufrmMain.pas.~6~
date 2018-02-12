@@ -75,11 +75,11 @@ begin
       end;
     end;
     Counts.TryGetValue('TLabel', Count);
-    Line:= Line + IntToStr(Count) + ',';
+    Line:= Line + IntToStr(Count) + ', ';
     //Counts.TryGetValue('TEdit', Count);
-    //Line:= Line + IntToStr(Count) + ',';
+    //Line:= Line + IntToStr(Count) + ', ';
     //Counts.TryGetValue('TButton', Count);
-    //Line:= Line + IntToStr(Count) + ',';
+    //Line:= Line + IntToStr(Count) + ', ';
     Line:= Line + Secs;
     AssignFile(myFile, '../train.csv');
     if FileExists(ExtractFilePath(Application.ExeName) + '../train.csv', FollowLink) then

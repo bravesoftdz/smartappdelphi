@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>Prediccion de humedad</title>
+<title>Prediccion</title>
 <head>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="{{url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
@@ -15,8 +15,9 @@ $(function() {
             contentType: "application/json; charset=utf-8",
             type: "POST",
             url: $SCRIPT_ROOT + 'predict',
-            data: JSON.stringify([{Sensor:'SP200',Textura:'R',Periodo:300}]),
+            data: JSON.stringify([{labels:5}]),
             success: function(data) {
+				console.log(data.prediction);
                 $("#prediction").text(data.prediction);
             },
             error: function(error) {
@@ -29,7 +30,7 @@ $(function() {
 </script>
 </head>
 <body>
-  <a href=# id=predict>Predecir Humedad</a>
+  <a href=# id=predict>Predecir</a>
   <p><span id=prediction>?</span>
 </body>
 </html>

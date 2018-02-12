@@ -75,23 +75,23 @@ begin
       end;
     end;
     Counts.TryGetValue('TLabel', Count);
-    Line:= Line + IntToStr(Count) + ',';
+    Line:= Line + IntToStr(Count) + ', ';
     //Counts.TryGetValue('TEdit', Count);
-    //Line:= Line + IntToStr(Count) + ',';
+    //Line:= Line + IntToStr(Count) + ', ';
     //Counts.TryGetValue('TButton', Count);
-    //Line:= Line + IntToStr(Count) + ',';
+    //Line:= Line + IntToStr(Count) + ', ';
     Line:= Line + Secs;
-    AssignFile(myFile, '../train.csv');
-    if FileExists(ExtractFilePath(Application.ExeName) + '../train.csv', FollowLink) then
+    AssignFile(myFile, 'Train.csv');
+    if FileExists(ExtractFilePath(Application.ExeName) + 'Train.csv', FollowLink) then
       Append(myFile)
     else
     begin
       ReWrite(myFile);
       WriteLn(myFile,
-        'labels,' +
-        //'edits,' +
-        //'buttons,' +
-        'time');
+        'Labels, ' +
+        //'Edits, ' +
+        //'Buttons, ' +
+        'Time');
     end;
     WriteLn(myFile, Line);
     CloseFile(myFile);
